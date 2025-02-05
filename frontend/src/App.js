@@ -6,6 +6,9 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Navbar from "./components/Navbar";
+import RecipeForm from './components/RecipeForm';
+import RecipeEdit from './components/RecipeEdit';
+import UploadImage from './components/UploadImage';
 import "./App.css";
  
 function App() {
