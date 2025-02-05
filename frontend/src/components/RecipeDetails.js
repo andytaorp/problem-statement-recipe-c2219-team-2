@@ -1,4 +1,4 @@
-import { useWorkoutsContext } from '../Hooks/useRecipeContext'
+import { useRecipeContext } from '../Hooks/useRecipeContext'
 import { useAuthContext } from '../Hooks/useAuthContext'
 
 // date fns
@@ -28,8 +28,8 @@ const RecipeDetails = ({ recipe }) => {
 
   return (
     <div className="recipe-details">
-      <h4>{recipe.title}</h4>
-      <p><strong>Ingredients: </strong>{recipe.ingredients}</p>
+      <h4>{recipe.title}</h4> {/* title, ingredient, steps all idk if its right idk the name in the database yet. change later */}
+      <p><strong>Ingredients: </strong>{recipe.ingredients}</p> 
       <p><strong>Steps: </strong>{recipe.steps}</p>
 
       <p>{formatDistanceToNow(new Date(recipe.createdAt), { addSuffix: true })}</p>
