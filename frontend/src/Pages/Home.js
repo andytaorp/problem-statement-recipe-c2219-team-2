@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { getRecipes, deleteRecipe } from "../services/api";
+import React, { useState } from "react";
 
 export default function Home() {
-  const [recipes, setRecipes] = useState([]);
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    getRecipes().then((res) => setRecipes(res.data));
-  }, []);
+  const [recipes, setRecipes] = useState([
+    { id: 1, name: "Spaghetti Carbonara", prepTime: 20 },
+    { id: 2, name: "Chicken Curry", prepTime: 40 }
+  ]);
 
   return (
     <div>
       <h1>Recipe List</h1>
       {recipes.map((recipe) => (
-        <div key={recipe._id}>
+        <div key={recipe.id}>
           <h2>{recipe.name}</h2>
           <p>Prep Time: {recipe.prepTime} min</p>
-          <button onClick={() => deleteRecipe(recipe._id, token)}>Delete</button>
         </div>
       ))}
     </div>
