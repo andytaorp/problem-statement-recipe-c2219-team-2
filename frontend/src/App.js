@@ -2,10 +2,9 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
  
 // pages & components
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import AddRecipe from "./pages/AddRecipe";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 import Navbar from "./components/Navbar";
 import "./App.css";
  
