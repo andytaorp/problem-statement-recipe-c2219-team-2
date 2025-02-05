@@ -6,12 +6,10 @@ const RecipeForm = () => {
   const { dispatch } = useRecipeContext()
   const { user } = useAuthContext()
 
-  const [name, setName] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
-  const [prepTime, setPrepTime] = useState("");
-  const [difficulty, setDifficulty] = useState("easy");
-  const [imageUrl, setImageUrl] = useState("");
+  const [title, setTitle] = useState('')
+  const [ingredients, setIngredients] = useState('')
+  const [steps, setSteps] = useState('')
+  const [difficulty, setDifficulty] = useState('easy')
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
 
@@ -40,15 +38,13 @@ const RecipeForm = () => {
       setEmptyFields(json.emptyFields)
     }
     if (response.ok) {
-      setName('')
+      setTitle('')
       setIngredients('')
-      setInstructions('')
-      setPrepTime('')
-      setDifficulty('')
-      setImageUrl('')
+      setSteps('')
+      setDifficulty('easy')
       setError(null)
       setEmptyFields([])
-      dispatch({ type: 'CREATE_RECIPE', payload: json })
+      dispatch({type: 'CREATE_RECIPE', payload: json})
     }
   }
 
@@ -56,56 +52,42 @@ const RecipeForm = () => {
     <form className="create" onSubmit={handleSubmit}>
       <h3>Add a New Recipe</h3>
 
-      <label>Recipe Name:</label>
-      <input
+      <label>Recipe Title:</label>
+      <input 
         type="text"
-        onChange={(e) => setName(e.target.value)}
-        value={name}
-        className={emptyFields.includes('name') ? 'error' : ''}
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
+        className={emptyFields.includes('title') ? 'error' : ''}
       />
 
-      <label>Ingredients:</label>
-      <input
-        type="number"
+      <label>Ingredients</label>
+      <input 
+        type="text"
         onChange={(e) => setIngredients(e.target.value)}
         value={ingredients}
-        className={emptyFields.includes('ingredients') ? 'error' : ''}
+        className={emptyFields.includes('load') ? 'error' : ''}
       />
 
-      <label>Instructions:</label>
-      <input
-        type="number"
-        onChange={(e) => setInstructions(e.target.value)}
-        value={instructions}
-        className={emptyFields.includes('instructions') ? 'error' : ''}
+    <label>Steps:</label>
+      <input 
+        type="text"
+        onChange={(e) => setSteps(e.target.value)}
+        value={steps}
+        className={emptyFields.includes('steps') ? 'error' : ''}
       />
 
-      <label>Prep Time:</label>
-      <input
-        type="number"
-        onChange={(e) => setPrepTime(e.target.value)}
-        value={prepTime}
-        className={emptyFields.includes('preptime') ? 'error' : ''}
-      />
-
-      <label>Set Difficult:</label>
-      <input
-        type="number"
+      {/*  <label>Difficulty:</label> m not confident in the select part 
+      <select
         onChange={(e) => setDifficulty(e.target.value)}
         value={difficulty}
         className={emptyFields.includes('difficulty') ? 'error' : ''}
-      />
+      >
+        <option value="easy">easy</option>
+        <option value="medium">medium</option>
+        <option value="difficult">difficul</option>
+      </select>*/}
 
-      <label>Set Difficult:</label>
-      <input
-        type="text" 
-        alt="Recipe Image"
-        onChange={(e) => setImageUrl(e.target.value)}
-        value={imageUrl}
-        className={emptyFields.includes('imageUrl') ? 'error' : ''}
-      />
-
-      <button>Add Workout</button>
+      <button>Add Recipe</button>
       {error && <div className="error">{error}</div>}
     </form>
   )
