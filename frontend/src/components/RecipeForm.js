@@ -9,7 +9,7 @@ const RecipeForm = () => {
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [steps, setSteps] = useState('')
-  const [difficulty, setDifficulty] = useState('easy')
+//   const [difficulty, setDifficulty] = useState('easy')
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
 
@@ -41,7 +41,7 @@ const RecipeForm = () => {
       setTitle('')
       setIngredients('')
       setSteps('')
-      setDifficulty('easy')
+    //   setDifficulty('easy')
       setError(null)
       setEmptyFields([])
       dispatch({type: 'CREATE_RECIPE', payload: json})
@@ -76,7 +76,7 @@ const RecipeForm = () => {
         className={emptyFields.includes('steps') ? 'error' : ''}
       />
 
-      <label>Difficulty:</label> {/*  m not confident in the select part */}
+      {/*  <label>Difficulty:</label> m not confident in the select part 
       <select
         onChange={(e) => setDifficulty(e.target.value)}
         value={difficulty}
@@ -85,7 +85,7 @@ const RecipeForm = () => {
         <option value="easy">easy</option>
         <option value="medium">medium</option>
         <option value="difficult">difficul</option>
-      </select>
+      </select>*/}
 
       <button>Add Recipe</button>
       {error && <div className="error">{error}</div>}
