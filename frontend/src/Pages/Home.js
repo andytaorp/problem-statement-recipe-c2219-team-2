@@ -15,7 +15,7 @@ const Home = () => {
       if (!user) return;
 
       try {
-        const response = await fetch('/api/recipes', {
+        const response = await fetch('http://localhost:4000/api/recipes', {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         const json = await response.json();
