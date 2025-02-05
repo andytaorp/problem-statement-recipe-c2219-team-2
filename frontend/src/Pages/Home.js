@@ -1,43 +1,48 @@
-import { useEffect }from 'react'
-import { useRecipeContext } from "../Hooks/useRecipeContext"
-import { useAuthContext } from "../Hooks/useAuthContext"
-import RecipeForm from "../Components/RecipeForm"
+import { useEffect } from 'react';
+import { useRecipeContext } from '../Hooks/useRecipeContext';
+import { useAuthContext } from '../Hooks/useAuthContext';
+import RecipeForm from '../Components/RecipeForm';
 
 // components
-import RecipeDetails from '../Components/RecipeDetails'
-
+import RecipeDetails from '../Components/RecipeDetails';
 
 const Home = () => {
-  const {recipe, dispatch} = useRecipeContext()
-  const {user} = useAuthContext()
+  const { recipes, dispatch } = useRecipeContext();  
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchRecipe = async () => {
-      const response = await fetch('/api/recipe', {
-        headers: {'Authorization': `Bearer ${user.token}`},
-      })
-      const json = await response.json()
+      if (!user) return;
 
-      if (response.ok) {
-        dispatch({type: 'SET_RECIPE', payload: json})
+      try {
+        const response = await fetch('/api/recipes', {
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        const json = await response.json();
+
+        if (response.ok) {
+          dispatch({ type: 'SET_RECIPE', payload: json });
+        } else {
+          console.error('Error fetching recipes:', json);
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
       }
-    }
+    };
 
-    if (user) {
-      fetchRecipe()
-    }
-  }, [dispatch, user])
+    fetchRecipe();
+  }, [dispatch, user]);
 
   return (
     <div className="home">
       <div className="recipe">
-        {recipe && recipe.map((recipe) => (
+        {recipes && recipes.map((recipe) => ( 
           <RecipeDetails key={recipe._id} recipe={recipe} />
         ))}
       </div>
       <RecipeForm />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
