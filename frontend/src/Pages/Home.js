@@ -4,7 +4,7 @@ import { useAuthContext } from "../Hooks/useAuthContext"
 
 // components
 // import RecipeDetails from '../components/RecipeDetails'
-import RecipeForm from '../components/RecipeForm'
+import RecipeForm from '../Components/RecipeForm'
 
 const Home = () => {
   const {recipe, dispatch} = useRecipeContext()
