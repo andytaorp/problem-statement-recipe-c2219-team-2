@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { RecipeContextProvider } from './Context/RecipeContextProvider';
+import { RecipeContextProvider } from './Context/RecipeContext';
 import { AuthContextProvider } from './Context/AuthContext';
 
 
