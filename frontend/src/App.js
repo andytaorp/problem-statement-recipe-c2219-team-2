@@ -6,7 +6,7 @@ import Home from './Pages/Home'
 import Edit from './Pages/Edit'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
-import Navbar from './components/Navbar'
+import Navbar from './Components/Navbar'
 
 function App() {
   const { user } = useAuthContext()
