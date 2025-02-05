@@ -1,7 +1,7 @@
 import { useEffect }from 'react'
 import { useRecipeContext } from "../Hooks/useRecipeContext"
 import { useAuthContext } from "../Hooks/useAuthContext"
-import RecipeForm from "../components/RecipeForm"
+import RecipeForm from "../Components/RecipeForm"
 
 // components
 import RecipeDetails from '../Components/RecipeDetails'

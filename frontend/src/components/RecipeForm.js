@@ -1,114 +1,123 @@
-import { useState } from "react"
-import { useRecipeContext } from "../Hooks/useRecipeContext"
-import { useAuthContext } from '../Hooks/useAuthContext'
+import { useState, useContext } from 'react';
+import { useAuthContext } from "../Hooks/useAuthContext"; 
+import { RecipeContext } from '../Context/RecipeContext';
 
 const RecipeForm = () => {
-  const { dispatch } = useRecipeContext()
-  const { user } = useAuthContext()
+  const [name, setName] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [instructions, setInstructions] = useState('');
+  const [difficulty, setDifficulty] = useState('easy'); 
+  const [prepTime, setPrepTime] = useState('');
+  const [category, setCategory] = useState('Dessert'); 
+  const [error, setError] = useState(null);
 
-  const [name, setName] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
-  const [prepTime, setPrepTime] = useState("");
-  const [difficulty, setDifficulty] = useState("easy");
-  const [imageUrl, setImageUrl] = useState("");
-  const [error, setError] = useState(null)
-  const [emptyFields, setEmptyFields] = useState([])
+  const { user } = useAuthContext(); 
+  const { dispatch } = useContext(RecipeContext); 
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!user) {
-      setError('You must be logged in')
-      return
-    }
+    const recipe = { name, ingredients, instructions, prepTime, difficulty, category };
 
-    const recipe = { name, ingredients, instructions, prepTime, difficulty, imageUrl }
+    try {
+      const response = await fetch('http://localhost:4000/api/recipes', {
+        method: 'POST',
+        body: JSON.stringify(recipe),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`, 
+        },
+      });
 
-    const response = await fetch('api/recipe', {
-      method: 'POST',
-      body: JSON.stringify(recipe),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
+      if (!response.ok) {
+        throw new Error('Unable to add recipe');
       }
-    })
-    const json = await response.json()
 
-    if (!response.ok) {
-      setError(json.error)
-      setEmptyFields(json.emptyFields)
+      const json = await response.json();
+      console.log(json);
+
+      dispatch({
+        type: 'CREATE_RECIPE',
+        payload: json, 
+      });
+
+      setName('');
+      setIngredients('');
+      setInstructions('');
+      setPrepTime('');
+      setDifficulty('easy'); 
+      setCategory('Dessert'); 
+      setError(null); 
+
+    } catch (err) {
+      setError(err.message); 
     }
-    if (response.ok) {
-      setName('')
-      setIngredients('')
-      setInstructions('')
-      setPrepTime('')
-      setDifficulty('')
-      setImageUrl('')
-      setError(null)
-      setEmptyFields([])
-      dispatch({ type: 'CREATE_RECIPE', payload: json })
-    }
-  }
+  };
 
   return (
-    <form className="create" onSubmit={handleSubmit}>
-      <h3>Add a New Recipe</h3>
-
+    <form onSubmit={handleSubmit} className="recipe-form">
       <label>Recipe Name:</label>
-      <input
-        type="text"
-        onChange={(e) => setName(e.target.value)}
-        value={name}
-        className={emptyFields.includes('name') ? 'error' : ''}
+      <input 
+        type="text" 
+        value={name} 
+        onChange={(e) => setName(e.target.value)} 
+        required 
       />
 
       <label>Ingredients:</label>
-      <input
-        type="number"
-        onChange={(e) => setIngredients(e.target.value)}
-        value={ingredients}
-        className={emptyFields.includes('ingredients') ? 'error' : ''}
+      <input 
+        value={ingredients} 
+        onChange={(e) => setIngredients(e.target.value)} 
+        required 
       />
 
-      <label>Instructions:</label>
-      <input
-        type="number"
-        onChange={(e) => setInstructions(e.target.value)}
-        value={instructions}
-        className={emptyFields.includes('instructions') ? 'error' : ''}
+      <label>Cooking Instructions:</label>
+      <input 
+        value={instructions} 
+        onChange={(e) => setInstructions(e.target.value)} 
+        required 
       />
 
-      <label>Prep Time:</label>
-      <input
-        type="number"
-        onChange={(e) => setPrepTime(e.target.value)}
-        value={prepTime}
-        className={emptyFields.includes('preptime') ? 'error' : ''}
+      <label>Preparation Time (mins):</label>
+      <input 
+        type="number" 
+        value={prepTime} 
+        onChange={(e) => setPrepTime(e.target.value)} 
+        required 
       />
 
-      <label>Set Difficult:</label>
-      <input
-        type="number"
-        onChange={(e) => setDifficulty(e.target.value)}
-        value={difficulty}
-        className={emptyFields.includes('difficulty') ? 'error' : ''}
-      />
+      <label>Difficulty Level:</label>
+      <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} required>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
 
-      <label>Set Difficult:</label>
-      <input
-        type="text" 
-        alt="Recipe Image"
-        onChange={(e) => setImageUrl(e.target.value)}
-        value={imageUrl}
-        className={emptyFields.includes('imageUrl') ? 'error' : ''}
-      />
+      <label>Category:</label>
+      <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+        <option value="Dessert">Dessert</option>
+        <option value="Main Dish">Main Dish</option>
+        <option value="Appetizer">Appetizer</option>
+        <option value="Salad">Salad</option>
+        <option value="Beverage">Beverage</option>
+        <option value="Soup">Soup</option>
+        <option value="Bread">Bread</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Side Dish">Side Dish</option>
+        <option value="Snack">Snack</option>
+        <option value="Sauce">Sauce</option>
+        <option value="Marinade">Marinade</option>
+        <option value="Finger Food">Finger Food</option>
+        <option value="Other">Other</option>
+      </select>
 
-      <button>Add Workout</button>
-      {error && <div className="error">{error}</div>}
+      <br/>
+      <br/>
+      <button type="submit">Add Recipe</button>
+
+      {error && <p className="error">{error}</p>} 
     </form>
-  )
-}
+  );
+};
 
-export default RecipeForm
+export default RecipeForm;
