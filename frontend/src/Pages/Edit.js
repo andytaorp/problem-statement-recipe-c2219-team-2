@@ -17,7 +17,7 @@ const Edit = () => {
 
   useEffect(() => {
     const fetchRecipe = async () => {
-      const response = await fetch(`http://localhost:4000/api/recipes/${id}`, {
+      const response = await fetch(`http://localhost:4000/api/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -53,7 +53,7 @@ const Edit = () => {
       imageUrl,
     };
 
-    const response = await fetch(`http://localhost:4000/api/recipes/${id}`, {
+    const response = await fetch(`http://localhost:4000/api/${id}`, {
       method: "PATCH",
       body: JSON.stringify(updatedRecipe),
       headers: {
