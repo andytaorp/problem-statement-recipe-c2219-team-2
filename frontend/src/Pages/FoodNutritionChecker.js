@@ -53,6 +53,7 @@ const FoodNutritionChecker = () => {
     return (
       <div className="nutrition-data">
         <h3>Nutritional Information:</h3>
+        {/* You can render specific fields here instead of a JSON dump */}
         <pre>{JSON.stringify(nutritionResult, null, 2)}</pre>
       </div>
     );
