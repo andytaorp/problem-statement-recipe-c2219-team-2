@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useRecipeContext } from "../Hooks/useRecipeContext"
 import { useAuthContext } from '../Hooks/useAuthContext'
 
-const WorkoutForm = () => {
+const RecipeForm = () => {
   const { dispatch } = useRecipeContext()
   const { user } = useAuthContext()
 
@@ -23,9 +23,9 @@ const WorkoutForm = () => {
       return
     }
 
-    const recipe = { name, ingredients, instructions, prepTime, difficulty, imageUrl }
+    const recipe = {title, ingredients, steps, difficulty}
 
-    const response = await fetch('api/workouts', {
+    const response = await fetch('/api/recipe', {
       method: 'POST',
       body: JSON.stringify(recipe),
       headers: {
@@ -111,4 +111,4 @@ const WorkoutForm = () => {
   )
 }
 
-export default WorkoutForm
+export default RecipeForm
