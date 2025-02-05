@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from './Hooks/useAuthContext'
 
 // pages & components
-import Home from './pages/Home'
-import Edit from './pages/Edit'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
+import Home from './Pages/Home'
+import Edit from './Pages/Edit'
+import Login from './Pages/Login'
+import Signup from './Pages/Signup'
 import Navbar from './Components/Navbar'
 
 function App() {
