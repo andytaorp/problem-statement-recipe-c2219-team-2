@@ -5,6 +5,8 @@ Got the forntend to be able to work -> Gideon
 
 All "Components" (Navbar, RecipeDetails, RecipeForms, Edit and AI) -> Julian (and suffered deploying)
 
+Other Frontend: Rest of the group
+
 **Currently using singular account for testing**
 email: usertest02@gmail.com
 password: usertestPassword123!
