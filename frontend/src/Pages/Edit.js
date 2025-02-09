@@ -15,7 +15,7 @@ const Edit = () => {
   const [instructions, setInstructions] = useState("");
   const [prepTime, setPrepTime] = useState("");
   const [difficulty, setDifficulty] = useState("easy");
-  const [imageUrl, setImageUrl] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState(null);
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user?.token; // Access the token from the user object
@@ -48,7 +48,7 @@ const Edit = () => {
         setInstructions(json.instructions);
         setPrepTime(json.prepTime);
         setDifficulty(json.difficulty);
-        setImageUrl(json.imageUrl || "");
+        
       } else {
         setError("Failed to fetch recipe: " + json.error);
       }
@@ -73,7 +73,7 @@ const Edit = () => {
       imageUrl,
     };
 
-    const response = await fetch(`http://localhost:4000/api/recipes/${id}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/recipes/${id}`, {
       
       method: "PATCH",
       body: JSON.stringify(updatedRecipe),

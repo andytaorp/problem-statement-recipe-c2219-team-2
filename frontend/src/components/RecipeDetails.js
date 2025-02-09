@@ -43,11 +43,11 @@ const RecipeDetails = ({ recipe }) => {
       <p><strong>Instructions:</strong>{recipe.instructions}</p>
       <p><strong>Peparation Time:</strong>{recipe.prepTime}</p>
       <p><strong>Difficulty:</strong>{recipe.difficulty}</p>
-      <p><strong>Image:</strong><img src='{recipe.ImageUrl}' alt="Placeholder"/></p>
+      {/* <p><strong>Image:</strong><img src='{recipe.ImageUrl}' alt="Placeholder"/></p> */}
 
       <p>{formatDistanceToNow(new Date(recipe.createdAt), { addSuffix: true })}</p>
-      <span className="material-symbols-outlined" onClick={handleEdit} style={{ marginRight: "50px" }}>edit</span>
-      <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+      <span className="material-symbols-outlined" onClick={handleEdit} style={{ marginRight: "50px" }}>Edit</span>
+      <span className="material-symbols-outlined" onClick={handleClick}>Delete</span>
     </div>
   )
 }
