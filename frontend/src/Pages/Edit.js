@@ -134,12 +134,12 @@ const Edit = () => {
           <option value="hard">Hard</option>
         </select>
 
-        <label>Image URL (optional):</label>
+        {/* <label>Image URL (optional):</label>
         <input
           type="text"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
-        />
+        /> */}
 
         <button type="submit">Update Recipe</button>
         {error && <div className="error">{error}</div>}

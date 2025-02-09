@@ -8,7 +8,7 @@ const RecipeForm = () => {
   const [instructions, setInstructions] = useState('');
   const [difficulty, setDifficulty] = useState('easy'); 
   const [prepTime, setPrepTime] = useState('');
-  const [category, setCategory] = useState('Dessert'); 
+
   const [error, setError] = useState(null);
 
   const { user } = useAuthContext(); 
@@ -17,7 +17,7 @@ const RecipeForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const recipe = { name, ingredients, instructions, prepTime, difficulty, category };
+    const recipe = { name, ingredients, instructions, prepTime, difficulty};
 
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/recipes`, {
@@ -46,7 +46,7 @@ const RecipeForm = () => {
       setInstructions('');
       setPrepTime('');
       setDifficulty('easy'); 
-      setCategory('Dessert'); 
+      
       setError(null); 
 
     } catch (err) {
@@ -93,23 +93,7 @@ const RecipeForm = () => {
         <option value="hard">Hard</option>
       </select>
 
-      <label>Category:</label>
-      <select value={category} onChange={(e) => setCategory(e.target.value)} required>
-        <option value="Dessert">Dessert</option>
-        <option value="Main Dish">Main Dish</option>
-        <option value="Appetizer">Appetizer</option>
-        <option value="Salad">Salad</option>
-        <option value="Beverage">Beverage</option>
-        <option value="Soup">Soup</option>
-        <option value="Bread">Bread</option>
-        <option value="Breakfast">Breakfast</option>
-        <option value="Side Dish">Side Dish</option>
-        <option value="Snack">Snack</option>
-        <option value="Sauce">Sauce</option>
-        <option value="Marinade">Marinade</option>
-        <option value="Finger Food">Finger Food</option>
-        <option value="Other">Other</option>
-      </select>
+      
 
       <br/>
       <br/>
