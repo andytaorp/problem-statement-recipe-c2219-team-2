@@ -69,8 +69,8 @@ const Edit = () => {
       ingredients: ingredientsArray,
       instructions,
       prepTime: Number(prepTime),
-      difficulty
-      // imageUrl,
+      difficulty,
+      
     };
 
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/recipes/${id}`, {

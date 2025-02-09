@@ -3,7 +3,7 @@
 
 Got the forntend to be able to work -> Gideon
 
-All Components (Navbar, RecipeDetails, RecipeForms) -> Julian (Edit and AI WIP)
+All "Components" (Navbar, RecipeDetails, RecipeForms, Edit and AI) -> Julian (and suffered deploying)
 
 **Currently using singular account for testing**
 email: usertest02@gmail.com
