@@ -116,8 +116,13 @@ input.error {
   border: 1px solid var(--error);
 }
 
+span{
+  margin: 10px;
+}
+
 span:hover {
   box-shadow: 1px 1px 5px #333;
+  
 }
 
 /* navbar */
@@ -151,18 +156,3 @@ form.login {
   border-radius: 4px;
 }
 
-/* input.NutriInfo {
-  Display: none;
-}
-
-Label.NutriInfo {
-  Height: 100px;
-  Width: 150px;
-  Border-radius: 60px;
-  Border: 1px dashed #999;
-}
-
-Label:hover.NutriInfo {
-  Color: #de0611;
-  Border: 1px dashed #de0611;
-} */
