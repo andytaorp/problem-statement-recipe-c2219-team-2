@@ -38,9 +38,12 @@ const RecipeDetails = ({ recipe }) => {
 
   return (
     <div className="recipe-details">
-      <h4>{recipe.title}</h4> 
+      <h4>{recipe.name}</h4> 
       <p><strong>Ingredients: </strong>{recipe.ingredients}</p> 
-      <p><strong>Steps: </strong>{recipe.steps}</p>
+      <p><strong>Instructions:</strong>{recipe.instructions}</p>
+      <p><strong>Peparation Time:</strong>{recipe.prepTime}</p>
+      <p><strong>Difficulty:</strong>{recipe.difficulty}</p>
+      <p><strong>Image:</strong><img src='{recipe.ImageUrl}' alt="Placeholder"/></p>
 
       <p>{formatDistanceToNow(new Date(recipe.createdAt), { addSuffix: true })}</p>
       <span className="material-symbols-outlined" onClick={handleEdit} style={{ marginRight: "50px" }}>edit</span>

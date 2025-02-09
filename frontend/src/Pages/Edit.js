@@ -1,29 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useRecipeContext } from "../Hooks/useRecipeContext";
+// import { useAuthContext } from "../Hooks/useAuthContext";
 
 const Edit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { dispatch } = useRecipeContext();
+  // const { user } = useAuthContext();
 
-  const [name, setName] = useState("");
+
+  const [name, setName] = useState(""); 
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
   const [prepTime, setPrepTime] = useState("");
   const [difficulty, setDifficulty] = useState("easy");
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState(null);
+  const user = JSON.parse(localStorage.getItem('user'));
+  const token = user?.token; // Access the token from the user object
 
   useEffect(() => {
     const fetchRecipe = async () => {
-      const response = await fetch(`http://localhost:4000/api/${id}`, {
+      // Retrieve the user object from localStorage and extract the token
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = user?.token; // Access the token from the user object
+  
+      console.log("Token from localStorage:", token); // Log token to check
+  
+      if (!token) {
+        setError("User not authenticated.");
+        return; // Stop here if token is not available
+      }
+  
+      const response = await fetch(`http://localhost:4000/api/recipes/${id}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+          Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
         },
       });
+  
       const json = await response.json();
+  
       if (response.ok) {
         setName(json.name);
         setIngredients(json.ingredients.join(", "));
@@ -32,12 +50,14 @@ const Edit = () => {
         setDifficulty(json.difficulty);
         setImageUrl(json.imageUrl || "");
       } else {
-        setError("Failed to fetch recipe");
+        setError("Failed to fetch recipe: " + json.error);
       }
     };
-
+  
     fetchRecipe();
-  }, [id]);
+  }, [id]); // Re-run this effect when the `id` changes
+  
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,12 +73,13 @@ const Edit = () => {
       imageUrl,
     };
 
-    const response = await fetch(`http://localhost:4000/api/${id}`, {
+    const response = await fetch(`http://localhost:4000/api/recipes/${id}`, {
+      
       method: "PATCH",
       body: JSON.stringify(updatedRecipe),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 

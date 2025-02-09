@@ -6,7 +6,9 @@ import Home from './Pages/Home'
 import Edit from './Pages/Edit'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
-import Navbar from './Components/Navbar'
+import FoodLog from './Pages/foodLog'
+import Navbar from './components/Navbar'
+
 
 function App() {
   const { user } = useAuthContext()
@@ -32,6 +34,10 @@ function App() {
             <Route 
               path="/edit/:id" 
               element={user ? <Edit /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/foodLog" 
+              element={user ? <FoodLog /> : <Navigate to="/login" />} 
             />
           </Routes>
         </div>
