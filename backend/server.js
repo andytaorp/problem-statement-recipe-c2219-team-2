@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const recipeRoutes = require("./routes/recipeRoutes");
-const foodLogRoutes = require("./routes/foodLOgRoutes")
+const foodLogRoutes = require("./routes/foodLogRoutes")
 
 dotenv.config();
 
