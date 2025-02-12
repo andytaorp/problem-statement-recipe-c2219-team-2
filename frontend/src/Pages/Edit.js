@@ -33,7 +33,7 @@ const Edit = () => {
         return; // Stop here if token is not available
       }
   
-      const response = await fetch(`${process.env.REACT_APP_API_URL}api/recipes/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/recipes/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
