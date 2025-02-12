@@ -73,7 +73,7 @@ const Edit = () => {
       
     };
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}api/recipes/${id}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/recipes/${id}`, {
       
       method: "PATCH",
       body: JSON.stringify(updatedRecipe),
